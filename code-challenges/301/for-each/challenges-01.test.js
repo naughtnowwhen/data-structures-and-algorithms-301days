@@ -15,7 +15,7 @@ let speaker = function (message, callback) {
 };
 speaker('dogcatdogacat', greeting); //?
 
-let someChangeToShowUpOnGitHubForTest;
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
