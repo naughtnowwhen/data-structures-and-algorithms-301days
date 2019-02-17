@@ -61,32 +61,55 @@ CHALLENGE 3
 Write a function named citiesAtoJ that takes in an array of city names and uses a regular expression pattern to return a new array containing any cities that begin with the letters A through J, inclusive.
 ------------------------------------------------------------------------------------------------ */
 
+// let cityArr = ['A', 'B', "z", 'd', 'E', 'J', 'em', 'Ca'];
+
 const citiesAtoJ = (arr) => {
-  let regex = /[A-J][a-zA-Z]*/g;
-  console.log(arr.match(regex));
-  let finder = arr.match(regex);
-  return finder;
+  let cityOut = [];
+  let regex = /^[A-J][a-zA-Z]*/g;
+  if (arr instanceof Array) {
+    arr.forEach((word) => {
+      let test = word.match(regex); //?
+      if (test) {
+        word; //?
+        cityOut.push(word);
+      }
+    })
+    return cityOut;
+  }
 };
 
-citiesAtoJ('Me');
+
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
 
 You have created a game application and begin by asking users an easy question: In which month is Halloween?
 
-Write a function named matchMonth which uses a regular expression pattern to match any of these inputs: October, Oct, october, oct
+Write a function named matchMonth which uses a regular expression pattern to match any of these monthinputs: October, Oct, october, oct
 
-If the user enters any of these four inputs, return true. For any other input, return false.
+If the user enters any of these four monthinputs, return true. For any other input, return false.
 
 Do not use the vertical bar (pipe) in your pattern.
 ------------------------------------------------------------------------------------------------ */
 
+// let monthinputs = ['October','Oct','october','oct'];
+
+// let regex = /^October|Oct|october|oct$/gi;
+
+
 const matchMonth = (input) => {
-  if (input.test(/^October|Oct|october|oct$/gi)) {
-    return true;
+  console.log(input);
+  let regex = /^oct(ober)*$/gi;
+  if (typeof input === 'string') {
+    let test = regex.test(input);
+    return test; //?
   }
 };
+
+matchMonth('oct');
+
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -98,10 +121,14 @@ For example, if given the string "Hello, and have a wonderful day!", the word "H
 The expected output of "Hello, and have a wonderful day!" is ["and ", "have ", "a ", "wonderful "].
 ------------------------------------------------------------------------------------------------ */
 
+let punctInput = 'driving snow,  blustering winds, softening rain, and no weather report';
+
 const noPunctuation = str => {
-  let arr = [];
-  str.match(/[a-z]+\s/gi)
+  let regex = /[a-z]+\s/gi;
+  return str.match(regex); //?
 };
+
+noPunctuation(punctInput); //?
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
@@ -116,8 +143,9 @@ For example, 'Welcome to Code 301!' will return 'W_lc_m_ t_ C_d_ 301!'.
 ------------------------------------------------------------------------------------------------ */
 
 let hangman = (str) => {
-  // Solution code here...
+  return str.replace (/[a|e|i|o|u]/g, '_') //?
 };
+// hangman(`Welcome to Code 301!`)
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7 - Stretch Goal
@@ -132,9 +160,12 @@ Hint: All of these words end with the letters "ells".
 const seashells = 'She sells seashells by the seashore. The shells she sells are surely seashells. So if she sells shells on the seashore, I\'m sure she sells seashore shells.';
 
 const findShells = (str) => {
-  // Solution code here...
+  let regex = /s(h)*(eash)*ells/gi;
+  let finder = str.match(regex); //?
+  return finder;
 };
 
+findShells(seashells); //?
 /* ------------------------------------------------------------------------------------------------
 TESTS
 
@@ -183,14 +214,14 @@ describe('Testing challenge 3', () => {
 });
 
 describe('Testing challenge 4', () => {
-  test('It should match any of the acceptable inputs', () => {
+  test('It should match any of the acceptable monthinputs', () => {
     expect(matchMonth('Oct')).toBeTruthy();
     expect(matchMonth('oct')).toBeTruthy();
     expect(matchMonth('October')).toBeTruthy();
     expect(matchMonth('october')).toBeTruthy();
   });
 
-  test('It should not match anything other than the acceptable inputs', () => {
+  test('It should not match anything other than the acceptable monthinputs', () => {
     expect(matchMonth('November')).toBeFalsy();
     expect(matchMonth('nov')).toBeFalsy();
     expect(matchMonth(123)).toBeFalsy();
